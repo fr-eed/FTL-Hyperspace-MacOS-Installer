@@ -9,11 +9,16 @@ inputs:
     description: 'Version of the installer bundle (e.g., 1.0.0)'
     required: true
   hyperspace-version:
-    description: 'Hyperspace version to download (e.g., v1.20.2)'
+    description: 'Hyperspace version to download (e.g., v1.20.2 or "latest")'
     required: true
+  include-hyperspace:
+    description: 'Prepend Hyperspace.ftl as the first mod in the installer'
+    required: false
+    default: 'true'
   mod-files:
-    description: 'Space-separated paths to mod files'
-    required: true
+    description: 'Newline- or space-separated paths to additional mod files (in install order). Hyperspace.ftl is prepended automatically when include-hyperspace is true.'
+    required: false
+    default: ''
   installer-name:
     description: 'Installer display name'
     required: true
@@ -58,9 +63,21 @@ runs:
       shell: bash
       run: |
         WORKSPACE_ROOT=$(pwd)
+
+        # Compose final mod list: Hyperspace.ftl first (if enabled), then user mods.
+        FINAL_MODS=""
+        if [ "${{ inputs.include-hyperspace }}" = "true" ]; then
+          FINAL_MODS="$WORKSPACE_ROOT/hyperspace-installer-mac/external/Hyperspace.ftl"
+        fi
+        USER_MODS=$(echo "${{ inputs.mod-files }}" | tr '\n' ' ' | xargs)
+        if [ -n "$USER_MODS" ]; then
+          FINAL_MODS="$FINAL_MODS $USER_MODS"
+        fi
+        FINAL_MODS=$(echo "$FINAL_MODS" | xargs)
+
         hyperspace-installer-mac/scripts/build/build-installer.sh \
           --executable $WORKSPACE_ROOT/hyperspace-installer-mac/release/${{ inputs.arch }}/HyperspaceInstaller \
-          --mod-files "${{ inputs.mod-files }}" \
+          --mod-files "$FINAL_MODS" \
           --installer-name "${{ inputs.installer-name }}" \
           --installer-bundle-version "${{ inputs.installer-bundle-version }}" \
           --output-dir $WORKSPACE_ROOT/output/${{ inputs.arch }} \

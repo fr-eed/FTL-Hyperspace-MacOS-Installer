@@ -14,6 +14,9 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: macos-latest
@@ -26,18 +29,12 @@ jobs:
 
       - name: Retrieve Hyperspace basemod version (from .deps-versions)
         id: basemod-version
-        run: |
-          HYPERSPACE_VERSION=$(grep 'HYPERSPACE_VERSION' .deps-versions | cut -d'"' -f2)
-          echo "HYPERSPACE_VERSION=$HYPERSPACE_VERSION" >> $GITHUB_OUTPUT
-
-      - name: Download Hyperspace.ftl from release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          mkdir -p external
-          gh release download "${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}" -R FTL-Hyperspace/FTL-Hyperspace -p "*-MacOS.zip" -O /tmp/hyperspace.zip
-          unzip -q /tmp/hyperspace.zip -d /tmp/hyperspace
-          mv /tmp/hyperspace/Hyperspace.ftl external/Hyperspace.ftl
+          RAW_VERSION=$(grep 'HYPERSPACE_VERSION' .deps-versions | cut -d'"' -f2)
+          HYPERSPACE_VERSION=$(./scripts/utils/resolve-hyperspace-version.sh "$RAW_VERSION")
+          echo "HYPERSPACE_VERSION=$HYPERSPACE_VERSION" >> $GITHUB_OUTPUT
 
       - name: Build installer for ${{ matrix.arch }}
         id: build
@@ -47,7 +44,6 @@ jobs:
           installer-bundle-version: ${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}
           hyperspace-version: ${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}
           installer-name: "Hyperspace"
-          mod-files: "${{ github.workspace }}/external/Hyperspace.ftl"
 
       - name: Upload DMG to release
         if: inputs.release-tag != ''

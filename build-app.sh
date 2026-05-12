@@ -16,8 +16,8 @@ SCRIPTS_DIR="$REPO_ROOT/scripts"
 # Build executable
 "$SCRIPTS_DIR/build/build-executable.sh" "$ARCH"
 
-# Read hyperspace version from .deps-versions
-source "$REPO_ROOT/.deps-versions"
+# Read resolved versions written by download-deps.sh (handles "latest" sentinel)
+source "$REPO_ROOT/external/.downloaded-versions"
 
 # Build installer with basemod
 "$SCRIPTS_DIR/build/build-installer.sh" \

@@ -31,6 +31,9 @@ done
 # Default arch if not provided
 ARCH="${ARCH:-x86_64}"
 
+# Resolve "latest" to a concrete upstream tag (no-op for explicit versions)
+HYPERSPACE_VERSION=$("$SCRIPTS_DIR/utils/resolve-hyperspace-version.sh" "$HYPERSPACE_VERSION")
+
 # Map arm64 to aarch64 for ftlman filename
 FTLMAN_ARCH="$ARCH"
 if [ "$ARCH" = "arm64" ]; then

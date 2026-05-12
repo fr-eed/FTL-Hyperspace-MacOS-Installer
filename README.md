@@ -49,7 +49,7 @@ Use the `build-installer` action from your own repository:
      with:
        arch: ${{ matrix.arch }}
        installer-bundle-version: "1.0.0"
-       hyperspace-version: "v1.20.2"
+       hyperspace-version: "latest"
        installer-name: "My Awesome FTL Mod Pack"
        mod-files: |
          ${{ github.workspace }}/mods/mod1.ftl
@@ -60,9 +60,10 @@ Use the `build-installer` action from your own repository:
    **Parameters:**
    - `arch` — `x86_64` (Intel, better compatibility) or `arm64` (Apple Silicon). Use a matrix workflow to build both and speed up installation on new Macs.
    - `installer-bundle-version` — Version shown to users (e.g., `1.0.0`)
-   - `hyperspace-version` — Hyperspace release to bundle (minimum `v1.20.2` for macOS)
+   - `hyperspace-version` — Hyperspace release to bundle. Use `"latest"` to track upstream, or pin a tag like `"v1.22.2"`.
    - `installer-name` — Display name in the installer and app
-   - `mod-files` — Absolute paths to mod files (order matters — installed in this order)
+   - `include-hyperspace` *(optional, default `true`)* — Prepend `Hyperspace.ftl` as the first mod. Set to `false` to build an installer without the base Hyperspace mod.
+   - `mod-files` *(optional)* — Newline- or space-separated paths to additional mod files. Order matters — installed in this order, after `Hyperspace.ftl` when `include-hyperspace` is true.
    - `icon-path` — Optional path to `.icns` icon file (512×512 recommended)
 
    **Outputs:**

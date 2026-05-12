@@ -42,7 +42,6 @@ done
 
 # Validate required parameters
 [ -z "$EXECUTABLE" ] && error "Missing --executable parameter"
-[ -z "$MOD_FILES" ] && error "Missing --mod-files parameter"
 [ ! -f "$EXECUTABLE" ] && error "Executable not found: $EXECUTABLE"
 
 # Create output directory if it doesn't exist
