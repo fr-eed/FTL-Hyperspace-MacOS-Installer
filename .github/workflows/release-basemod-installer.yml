@@ -38,7 +38,7 @@ jobs:
 
       - name: Build installer for ${{ matrix.arch }}
         id: build
-        uses: fr-eed/hyperspace-installer-mac/actions/build-installer@main
+        uses: ./actions/build-installer
         with:
           arch: ${{ matrix.arch }}
           installer-bundle-version: ${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}

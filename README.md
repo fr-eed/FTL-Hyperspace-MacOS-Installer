@@ -45,7 +45,7 @@ Use the `build-installer` action from your own repository:
    ```yaml
    - name: Build custom installer
      id: build-installer
-     uses: fr-eed/hyperspace-mac-autoinstaller/actions/build-installer@main
+     uses: fr-eed/hyperspace-installer-mac/actions/build-installer@main
      with:
        arch: ${{ matrix.arch }}
        installer-bundle-version: "1.0.0"

@@ -52,6 +52,7 @@ jobs:
           BODY=$(cat .github/RELEASE_BODY.md)
           BODY="${BODY//LATEST_TAG/${{ steps.latest_tag.outputs.LATEST_TAG }}}"
           BODY="${BODY//CURRENT_VERSION/v${{ steps.version.outputs.VERSION }}}"
+          BODY="${BODY//REPO/${{ github.repository }}}"
           echo "BODY<<EOF" >> $GITHUB_ENV
           echo "$BODY" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -65,6 +66,6 @@ jobs:
 
   build-basemod:
     needs: build-and-release
-    uses: fr-eed/hyperspace-installer-mac/.github/workflows/release-basemod-installer.yml@main
+    uses: ./.github/workflows/release-basemod-installer.yml
     with:
       release-tag: v${{ needs.build-and-release.outputs.version }}

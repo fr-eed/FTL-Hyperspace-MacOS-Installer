@@ -11,4 +11,4 @@ Not sure? Click  → **About This Mac** → check the **Chip** line. If it says 
 
 ## Full Changelog
 
-[View changes](https://github.com/fr-eed/hyperspace-installer-mac/compare/LATEST_TAG...CURRENT_VERSION)
+[View changes](https://github.com/REPO/compare/LATEST_TAG...CURRENT_VERSION)
