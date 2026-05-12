@@ -1,4 +1,4 @@
-  # Hyperspace macOS Installer
+# FTL-Hyperspace macOS Installer
 
 A native macOS installer for [FTL: Hyperspace](https://github.com/FTL-Hyperspace/FTL-Hyperspace), a binary mod for [FTL: Faster Than Light](https://subsetgames.com/ftl.html). Handles installation of Hyperspace into your FTL game directory and manages mod dependencies with [ftlman](https://github.com/afishhh/ftlman).
 
@@ -23,7 +23,7 @@ This project can be used as a base to create custom installers for other FTL mod
 
 ## Installation of Hyperspace using the installer
 
-1. Download the latest `Hyperspace-*.dmg` from [Releases](https://github.com/fr-eed/hyperspace-installer-mac/releases)
+1. Download the latest `Hyperspace-*.dmg` from [Releases](https://github.com/FTL-Hyperspace/FTL-Hyperspace-MacOS-Installer/releases)
 2. Open the DMG and run the installer
 3. If macOS blocks the app, go to **System Settings → Privacy & Security** and click **Open Anyway**
 4. Select your FTL installation location (Steam, GOG, or custom)
@@ -45,7 +45,7 @@ Use the `build-installer` action from your own repository:
    ```yaml
    - name: Build custom installer
      id: build-installer
-     uses: fr-eed/hyperspace-installer-mac/actions/build-installer@main
+     uses: FTL-Hyperspace/FTL-Hyperspace-MacOS-Installer/actions/build-installer@main
      with:
        arch: ${{ matrix.arch }}
        installer-bundle-version: "1.0.0"

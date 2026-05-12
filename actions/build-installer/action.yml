@@ -34,18 +34,18 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Checkout hyperspace-installer-mac
+    - name: Checkout FTL-Hyperspace-MacOS-Installer
       uses: actions/checkout@v4
       with:
-        repository: fr-eed/hyperspace-installer-mac
-        path: hyperspace-installer-mac
+        repository: FTL-Hyperspace/FTL-Hyperspace-MacOS-Installer
+        path: FTL-Hyperspace-MacOS-Installer
 
     - name: Download executables
       env:
         GH_TOKEN: ${{ github.token }}
       shell: bash
       run: |
-        cd hyperspace-installer-mac
+        cd FTL-Hyperspace-MacOS-Installer
         ./scripts/downloads/download-executables.sh
 
     - name: Download dependencies
@@ -53,7 +53,7 @@ runs:
         GH_TOKEN: ${{ github.token }}
       shell: bash
       run: |
-        cd hyperspace-installer-mac
+        cd FTL-Hyperspace-MacOS-Installer
         ./scripts/downloads/download-deps.sh \
           --arch "${{ inputs.arch }}" \
           --hyperspace-version "${{ inputs.hyperspace-version }}"
@@ -67,7 +67,7 @@ runs:
         # Compose final mod list: Hyperspace.ftl first (if enabled), then user mods.
         FINAL_MODS=""
         if [ "${{ inputs.include-hyperspace }}" = "true" ]; then
-          FINAL_MODS="$WORKSPACE_ROOT/hyperspace-installer-mac/external/Hyperspace.ftl"
+          FINAL_MODS="$WORKSPACE_ROOT/FTL-Hyperspace-MacOS-Installer/external/Hyperspace.ftl"
         fi
         USER_MODS=$(echo "${{ inputs.mod-files }}" | tr '\n' ' ' | xargs)
         if [ -n "$USER_MODS" ]; then
@@ -75,8 +75,8 @@ runs:
         fi
         FINAL_MODS=$(echo "$FINAL_MODS" | xargs)
 
-        hyperspace-installer-mac/scripts/build/build-installer.sh \
-          --executable $WORKSPACE_ROOT/hyperspace-installer-mac/release/${{ inputs.arch }}/HyperspaceInstaller \
+        FTL-Hyperspace-MacOS-Installer/scripts/build/build-installer.sh \
+          --executable $WORKSPACE_ROOT/FTL-Hyperspace-MacOS-Installer/release/${{ inputs.arch }}/HyperspaceInstaller \
           --mod-files "$FINAL_MODS" \
           --installer-name "${{ inputs.installer-name }}" \
           --installer-bundle-version "${{ inputs.installer-bundle-version }}" \
