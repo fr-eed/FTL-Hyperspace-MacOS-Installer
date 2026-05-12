@@ -43,7 +43,7 @@ jobs:
           arch: ${{ matrix.arch }}
           installer-bundle-version: ${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}
           hyperspace-version: ${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}
-          installer-name: "Hyperspace"
+          installer-name: "FTL-Hyperspace"
 
       - name: Upload DMG to release
         if: inputs.release-tag != ''

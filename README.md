@@ -23,7 +23,7 @@ This project can be used as a base to create custom installers for other FTL mod
 
 ## Installation of Hyperspace using the installer
 
-1. Download the latest `Hyperspace-*.dmg` from [Releases](https://github.com/FTL-Hyperspace/FTL-Hyperspace-MacOS-Installer/releases)
+1. Download the latest `FTL-Hyperspace-*.dmg` from [Releases](https://github.com/FTL-Hyperspace/FTL-Hyperspace-MacOS-Installer/releases)
 2. Open the DMG and run the installer
 3. If macOS blocks the app, go to **System Settings → Privacy & Security** and click **Open Anyway**
 4. Select your FTL installation location (Steam, GOG, or custom)
@@ -106,7 +106,7 @@ This project uses Swift for the UI and shell scripts for installation logic.
 ./build-app.sh
 
 # Review the build output
-open release/arm64/Hyperspace.app
+open release/arm64/FTL-Hyperspace.app
 ```
 
 The build system is separated into stages:

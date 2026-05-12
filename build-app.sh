@@ -24,7 +24,7 @@ source "$REPO_ROOT/external/.downloaded-versions"
   --executable "$REPO_ROOT/release/$ARCH/HyperspaceInstaller" \
   --mod-files "$REPO_ROOT/external/Hyperspace.ftl" \
   --icon-path "$REPO_ROOT/HSInstaller.icns" \
-  --installer-name "Hyperspace" \
+  --installer-name "FTL-Hyperspace" \
   --output-dir "$REPO_ROOT/release/$ARCH" \
   --installer-bundle-version "$HYPERSPACE_VERSION" \
   --arch "$ARCH"
