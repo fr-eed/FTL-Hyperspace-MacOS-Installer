@@ -35,7 +35,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p external
-          gh release download "${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}" -R fr-eed/FTL-Hyperspace-Dino -p "*-MacOS.zip" -O /tmp/hyperspace.zip
+          gh release download "${{ steps.basemod-version.outputs.HYPERSPACE_VERSION }}" -R FTL-Hyperspace/FTL-Hyperspace -p "*-MacOS.zip" -O /tmp/hyperspace.zip
           unzip -q /tmp/hyperspace.zip -d /tmp/hyperspace
           mv /tmp/hyperspace/Hyperspace.ftl external/Hyperspace.ftl
 
